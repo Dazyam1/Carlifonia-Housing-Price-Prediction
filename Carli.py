@@ -2,10 +2,19 @@ import streamlit as st
 import pandas as pd
 import joblib
 
-# Load the pre-trained model using joblib
-model_path = 'C:/Users/user/Documents/Data Science/Models/Calinifonia Housing/Carlifonia Housing Prediction Model.sav'
-with open(model_path, 'rb') as file:
-    model = joblib.load(file)
+model = None  # Initialize model as None
+model_path = 'Carlifonia Housing Prediction Model.sav'
+
+try:
+    with open(model_path, 'rb') as file:
+        model = pickle.load(file)
+except FileNotFoundError:
+    st.error("Model file not found. Please check the file path.")
+except ModuleNotFoundError as e:
+    st.error(f"Missing module: {e}. Please ensure all dependencies are installed.")
+except Exception as e:
+    st.error(f"An error occurred while loading the model: {e}")
+
 
 # Page title and description
 st.title('California Housing Price Prediction')
