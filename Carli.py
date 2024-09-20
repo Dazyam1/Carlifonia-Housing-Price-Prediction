@@ -7,7 +7,7 @@ model_path = 'Carlifonia Housing Prediction Model.sav'
 
 try:
     with open(model_path, 'rb') as file:
-        model = pickle.load(file)
+        model = joblib.load(file)
 except FileNotFoundError:
     st.error("Model file not found. Please check the file path.")
 except ModuleNotFoundError as e:
